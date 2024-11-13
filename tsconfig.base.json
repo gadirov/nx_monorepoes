@@ -14,7 +14,13 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@react-monorepo/TTQ": ["libs/TTQ/src/index.ts"],
+      "@react-monorepo/admissionplan": ["libs/admissionplan/src/index.ts"],
+      "@react-monorepo/config": ["libs/shared/config"],
+      "@react-monorepo/journals": ["libs/journals/src/index.ts"],
+      "@react-monorepo/ui": ["libs/shared/ui/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
