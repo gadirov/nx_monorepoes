@@ -1,6 +1,7 @@
 import { Link, Outlet } from 'react-router-dom';
-import { i18nInstance, RootProvider } from '@react-monorepo/config';
-
+import { RootProvider } from '@react-monorepo/config';
+import { i18nInstance } from '@react-monorepo/translation';
+import { Button } from '@nextui-org/react';
 export const Main = () => {
   const changeLAnguage = (lang: string) => {
     document.documentElement.setAttribute('lang', lang);
@@ -17,6 +18,7 @@ export const Main = () => {
       <div style={{ display: 'flex', gap: '20px' }}>
         <Link to="/">
           <h1>Admission Plan</h1>
+          <Button color="primary">Test</Button>
         </Link>
         <Link to="/ttq">
           <h1>TTQ</h1>

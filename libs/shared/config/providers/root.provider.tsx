@@ -1,5 +1,6 @@
 import React from 'react';
-import { NextUIProvider } from '@nextui-org/system';
+import { NextUIProvider } from '@nextui-org/react';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useHref, useNavigate } from 'react-router-dom';
 

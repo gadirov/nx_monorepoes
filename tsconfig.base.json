@@ -19,7 +19,8 @@
       "@react-monorepo/admissionplan": ["libs/admissionplan/src/index.ts"],
       "@react-monorepo/config": ["libs/shared/config"],
       "@react-monorepo/journals": ["libs/journals/src/index.ts"],
-      "@react-monorepo/ui": ["libs/shared/ui/src/index.ts"]
+      "@react-monorepo/ui": ["libs/shared/ui/src/index.ts"],
+      "@react-monorepo/translation": ["libs/shared/config/translation/i18n.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

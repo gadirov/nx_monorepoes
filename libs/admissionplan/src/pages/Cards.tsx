@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-
 export const Cards = () => {
   const { t } = useTranslation(['admissionplan', 'common']);
   return (
