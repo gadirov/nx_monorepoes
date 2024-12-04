@@ -1,13 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
+import { get } from '@react-monorepo/config';
 
 export const useTest = () => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading } = useQuery<any>({
     queryKey: ['test'],
     queryFn: async () => {
       try {
-        return await fetch('https://jsonplaceholder.typicode.com/todos').then(
-          (res) => res.json()
-        );
+        return await get('https://jsonplaceholder.typicode.com/todos');
       } catch (error) {}
     },
   });

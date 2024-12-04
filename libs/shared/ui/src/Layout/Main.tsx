@@ -1,30 +1,55 @@
 import { Link, Outlet } from 'react-router-dom';
-import { RootProvider } from '@react-monorepo/config';
-import { i18nInstance } from '@react-monorepo/translation';
-import { Button } from '@nextui-org/react';
+import { ProtectedRoutes, RootProvider } from '@react-monorepo/config';
+import { i18nInstance } from '@react-monorepo/config';
+import { Switch } from '@nextui-org/react';
+import { useState, useCallback } from 'react';
+
 export const Main = () => {
-  const changeLAnguage = (lang: string) => {
+  const [isSelected, setIsSelected] = useState(false);
+  const theme = isSelected ? 'dark' : 'light';
+  const changeLanguage = useCallback((lang: string) => {
     document.documentElement.setAttribute('lang', lang);
     i18nInstance.changeLanguage(lang);
-  };
+  }, []);
 
   return (
     <RootProvider>
-      <ul>
-        <li onClick={() => changeLAnguage('az')}>AZ</li>
-        <li onClick={() => changeLAnguage('en')}>EN</li>
-        <li onClick={() => changeLAnguage('ru')}> RU</li>
-      </ul>
-      <div style={{ display: 'flex', gap: '20px' }}>
-        <Link to="/">
-          <h1>Admission Plan</h1>
-          <Button color="primary">Test</Button>
-        </Link>
-        <Link to="/ttq">
-          <h1>TTQ</h1>
-        </Link>
-      </div>
-      <Outlet />
+      <main
+        className={`${theme} bg-background text-foreground transition-all duration-300`}
+      >
+        <Switch
+          isSelected={isSelected}
+          onChange={() => setIsSelected(!isSelected)}
+        />
+        <ul>
+          {['az', 'en', 'ru'].map((lang) => (
+            <li
+              key={lang}
+              onClick={() => changeLanguage(lang)}
+              className="cursor-pointer text-[20px]"
+            >
+              {lang.toUpperCase()}
+            </li>
+          ))}
+        </ul>
+        <hr />
+        <div>
+          <Link to="/admission-plan">
+            <h1 className="text-[20px] text-primary bg-primary-background  p-3 rounded-md ">
+              Admission Plan
+            </h1>
+            <hr />
+          </Link>
+          <Link to="/ttq">
+            <ProtectedRoutes roles={['view-applications']}>
+              <h1 className="text-lg text-primary bg-primary-background p-3 rounded-md w-full">
+                TTQ
+              </h1>
+            </ProtectedRoutes>
+          </Link>
+        </div>
+        <Outlet />
+      </main>
     </RootProvider>
   );
 };

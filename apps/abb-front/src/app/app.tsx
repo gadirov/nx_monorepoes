@@ -1,5 +1,4 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-
 import { AdmissionPlan } from '@react-monorepo/admissionplan';
 import { TTQ } from '@react-monorepo/TTQ';
 import { Main } from '@react-monorepo/ui';
@@ -8,10 +7,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 export function App() {
   const router = createBrowserRouter([
     {
-      path: '/*',
+      path: '/',
       element: <Main />,
       children: [
-        { index: true, element: <AdmissionPlan /> },
+        { path: 'admission-plan/*', element: <AdmissionPlan /> },
         { path: 'ttq/*', element: <TTQ /> },
       ],
     },

@@ -4,6 +4,36 @@
   "sourceRoot": "apps/abb-front/src",
   "projectType": "application",
   "tags": [],
-  "// targets": "to see all targets run: nx show project abb-front --web",
-  "targets": {}
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "options": {
+        "outputPath": "dist/apps/abb-front",
+        "fileReplacements": [],
+        "assets": ["apps/abb-front/src/assets"],
+        "styles": ["apps/abb-front/src/styles.css"],
+        "scripts": []
+      }
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "options": {
+        "buildTarget": "abb-front:build",
+        "port": 4200,
+        "host": "localhost"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/abb-front/**/*.ts", "apps/abb-front/**/*.tsx"]
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "options": {
+        "passWithNoTests": true
+      }
+    }
+  }
 }

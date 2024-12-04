@@ -6,12 +6,12 @@ export const TTQ = () => {
       <Route
         path="/"
         element={
-          <Link to={'rules'}>
-            <div>Tedrisin teshkili qaydalari</div>
+          <Link to="rules">
+            <div className="h-screen">Tedrisin teshkili qaydalari</div>
           </Link>
         }
       />
-      <Route path="/rules" element={<div>Qaydlar</div>} />
+      <Route path="/rules" element={<div className="h-screen">Qaydlar</div>} />
     </Routes>
   );
 };
