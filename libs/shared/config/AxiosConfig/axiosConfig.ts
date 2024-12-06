@@ -2,6 +2,17 @@ import axios, { AxiosRequestConfig } from 'axios';
 import Cookies from 'js-cookie';
 import { keycloak } from '../Keycloak/keycloak';
 
+enum HttpStatusCode {
+  OK = 200,
+  CREATED = 201,
+  NO_CONTENT = 204,
+  BAD_REQUEST = 400,
+  UNAUTHORIZED = 401,
+  FORBIDDEN = 403,
+  NOT_FOUND = 404,
+  INTERNAL_SERVER_ERROR = 500,
+}
+
 export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
 });
@@ -38,20 +49,23 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   function (error) {
-    //TODO tobe implemented
-    // const response = error.response.data;
-    if (error.response?.status === 401) {
-      Cookies.remove('token');
-      return;
-    }
-    //  toast.error(response.errorDetail, {
-    //    position: "top-right",
-    //    autoClose: 5000,
-    //    hideProgressBar: true,
-    //    theme: "colored",
-    //  });
+    //TODO: must be implemented!
+    const {
+      data: { errorDetail },
+      status,
+    } = error.response;
+    const isUnauthorized = () => status === HttpStatusCode.UNAUTHORIZED;
+    const isCommonErr = () =>
+      status === HttpStatusCode.NOT_FOUND ||
+      status === HttpStatusCode.FORBIDDEN;
 
-    //  return Promise.reject(response);
-    return Promise.reject(error);
+    if (isUnauthorized()) {
+      Cookies.remove('token');
+      window.location.href = '/';
+      return;
+    } else if (isCommonErr()) {
+      window.location.href = '/error';
+    }
+    return Promise.reject(error.response.data);
   }
 );
