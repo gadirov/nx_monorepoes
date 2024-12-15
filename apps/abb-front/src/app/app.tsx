@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { AdmissionPlan } from '@react-monorepo/admissionplan';
 import { TTQ } from '@react-monorepo/TTQ';
 import { Main } from '@react-monorepo/ui';
